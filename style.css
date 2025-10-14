@@ -1,0 +1,130 @@
+/* ファイル名: style.css
+説明: サイト全体のレイアウト、特にレスポンシブデザインとカスタム要素のスタイルを定義します。
+*/
+
+/* スムーズスクロールはHTMLタグに直接定義（index.html内の<style>ブロックに移行済み） */
+
+/* メインコンテンツコンテナの最大幅と中央寄せ */
+.main-container {
+    /* PCでの最大幅を1280pxに設定 */
+    max-width: 1280px; 
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* 固定ヘッダーの高さ分、セクションのターゲット位置を調整（index.htmlの<style>ブロックに移行済み） */
+:target {
+    scroll-margin-top: 4rem; /* ヘッダーの高さ h-16 (4rem) に合わせる */
+}
+
+/* CTAボタンのグラデーション */
+.cta-button {
+    background: linear-gradient(to right, #2196F3, #1976D2); /* 青のグラデーション */
+    transition: background 0.3s ease;
+}
+.cta-button:hover {
+    background: linear-gradient(to right, #1976D2, #2196F3);
+}
+
+/* サービスフローのアイコン背景 */
+.flow-step-icon {
+    background-color: #E3F2FD; /* 水色 */
+}
+
+/* 💡 追加: フッターの背景を水色に変更 */
+.custom-footer-bg {
+    /* ヒーローセクションで使われていた水色を使用 */
+    background-color: #e6f3ff !important;
+}
+
+/* 💡 CTAボタンのテキストカラーを白に強制設定 */
+.cta-button, .cta-button a {
+    color: white !important;
+}
+
+/* ... その他のカスタムCSS ... */
+
+/* 画像コンテナの調整（画像を右側に表示するために幅を設定） */
+.hero-image-container {
+    /* 画像コンテナの幅を広げ、画像を右に寄せやすくする */
+    width: 100%; 
+    height: 100%;
+    /* テキストと重ねるための負マージンを適用（例として100px左に引き戻す） */
+    margin-left: 10px; 
+    z-index: 0; 
+}
+
+/* キャッチコピーコンテナの調整（テキストが画像より上に来るようにする） */
+.hero-text-move {
+    /* テキストボックスが画面の左側に寄るように幅を調整（中央配置と干渉しないようフル幅に近い値に） */
+    width: 100%;
+    /* z-indexを高くして、画像より上に表示させる */
+    z-index: 10; 
+    
+    /* モバイル・PC共通の基本オフセットをリセット (PC側で transform を使用するため) */
+    position: absolute; 
+    left: 0px; 
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.hero-image-move {
+    /* 画像自体に相対位置を設定 */
+    position: relative;
+    /* モバイル・PC共通の基本オフセットをリセット */
+    left: 0; 
+    top: 0;
+}
+
+
+/* PC/タブレット（md以上）の場合のレイアウトと移動調整 */
+@media (min-width: 768px) {
+    
+    /* 💡 キャッチコピーのボックスの幅を1.5倍に拡大 (約672px) */
+    .hero-text {
+        max-width: 672px !important;
+    }
+    
+    /* 1. テキストボックス全体を右に100px移動 (中央からさらに右へ) */
+    .hero-text-move {
+        /* transform を使い、中央配置を維持しつつ全体を右に100pxシフト */
+        transform: translateX(-100px) !important; 
+    }
+    
+    /* 2. 画像自体を右に100px移動し、下に5cm潜り込ませる */
+    .hero-image-move {
+        position: relative; 
+        /* 水平方向の移動を100pxに増量 */
+        left: 100px !important; 
+        /* 垂直方向の移動 (下に5cm = 50px 潜り込ませる) */
+        top: 50px !important; 
+        
+        /* 💡 追加: 画像を1.5倍に拡大 */
+        transform: scale(1.1);
+        
+        /* 以前の左寄せの原因となるマージンを確実に削除 */
+        margin-right: 0 !important; 
+    }
+    
+    /* 画像コンテナの幅調整 (80%に拡大) */
+    .hero-image-container {
+        width: 80%;
+    }
+}
+
+/* モバイルの調整（今回は絶対配置に戻したため、Flexboxの上書きは不要） */
+@media (max-width: 767px) {
+    /* モバイルでは重なりを解除し、移動をリセット */
+    .hero-image-container {
+        margin-left: 0;
+    }
+    .hero-image-move,
+    .hero-text-move {
+        left: 0 !important;
+        top: 0 !important;
+        transform: none !important;
+    }
+}
