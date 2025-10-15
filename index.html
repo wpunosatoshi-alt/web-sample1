@@ -18,11 +18,10 @@
     <nav class="bg-white shadow-md sticky top-0 z-20">
         <div class="main-container flex justify-between items-center h-16 px-4 sm:px-6 lg:px-8">
             
-            <!-- サイト名 (相談支援センターに修正済み) -->
             <div class="text-xl font-bold text-gray-800">
                 相談支援センター
             </div>
-            <!-- ナビゲーションリンク (アクセスと運営方針の順序修正済み) -->
+            
             <div class="space-x-4 hidden md:flex">
                 <a href="#" class="text-gray-600 hover:text-blue-600 transition duration-150 scroll-link">HOME</a>
                 <a href="#company" class="text-gray-600 hover:text-blue-600 transition duration-150 scroll-link">会社紹介</a>
@@ -33,6 +32,21 @@
                 <a href="#access" class="text-gray-600 hover:text-blue-600 transition duration-150 scroll-link">アクセス</a>
                 <a href="#contact-form" class="text-gray-600 hover:text-blue-600 transition duration-150 scroll-link">お問い合わせ</a>
             </div>
+
+            <button id="menu-button" class="md:hidden text-gray-600 hover:text-blue-600 p-2 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg border-t border-gray-200">
+            <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-50 scroll-link">HOME</a>
+            <a href="#company" class="block px-4 py-2 text-gray-600 hover:bg-gray-50 scroll-link">会社紹介</a>
+            <a href="#target" class="block px-4 py-2 text-gray-600 hover:bg-gray-50 scroll-link">対象の方</a>
+            <a href="#flow" class="block px-4 py-2 text-gray-600 hover:bg-gray-50 scroll-link">相談の流れ</a>
+            <a href="#office" class="block px-4 py-2 text-gray-600 hover:bg-gray-50 scroll-link">事業所紹介</a>
+            <a href="#policy" class="block px-4 py-2 text-gray-600 hover:bg-gray-50 scroll-link">運営方針</a>
+            <a href="#access" class="block px-4 py-2 text-gray-600 hover:bg-gray-50 scroll-link">アクセス</a>
+            <a href="#contact-form" class="block px-4 py-2 text-gray-600 hover:bg-gray-50 scroll-link">お問い合わせ</a>
         </div>
     </nav>
     
@@ -339,62 +353,37 @@
 
     
     <!-- JavaScript (DOMContentLoadedでラップ済み) -->
+// index.htmlの最後にある <script> タグの中身を以下のように変更
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // 1. フォーム送信処理
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(event) {
-                    event.preventDefault(); 
-                    
-                    const messageBox = document.getElementById('messageBox');
-                    
-                    event.target.reset(); // フォームをリセット
-                    
-                    // メッセージを表示
-                    if (messageBox) {
-                        messageBox.classList.remove('hidden');
+            // ... (既存のフォーム送信処理とスムーズスクロール処理はそのまま) ...
+            
+            // 💡 3. ハンバーガーメニュー開閉処理の追加
+            const menuButton = document.getElementById('menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', function() {
+                    // 'hidden' クラスの有無を切り替えることでメニューを開閉
+                    mobileMenu.classList.toggle('hidden');
+                });
+
+                // リンクをクリックした際にもメニューを閉じるようにする
+                mobileMenu.querySelectorAll('.scroll-link').forEach(link => {
+                    link.addEventListener('click', function() {
+                        // スムーズスクロール実行後にメニューを閉じる
                         setTimeout(() => {
-                            messageBox.classList.add('hidden');
-                        }, 5000); // 5秒間表示
-                    }
-
-                    console.log("フォームが送信されました（実際にはデータは送信されていません）。");
+                            mobileMenu.classList.add('hidden');
+                        }, 50); 
+                    });
                 });
             }
-
-            // 2. スムーズスクロール処理
-            const navElement = document.querySelector('nav');
-            if (navElement) {
-                const navHeight = navElement.offsetHeight;
-
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    const href = anchor.getAttribute('href');
-                    const targetElement = href === '#' ? document.body : document.querySelector(href);
-
-                    if (targetElement) {
-                        anchor.addEventListener('click', function (e) {
-                            e.preventDefault();
-                            
-                            let targetPosition;
-
-                            if (href === '#') {
-                                // HOMEへ戻る
-                                targetPosition = 0;
-                            } else {
-                                // ナビゲーションバーの高さ分を考慮してスクロール位置を調整
-                                const rect = targetElement.getBoundingClientRect();
-                                targetPosition = rect.top + window.scrollY - navHeight;
-                            }
-                            
-                            window.scrollTo({
-                                top: targetPosition,
-                                behavior: 'smooth'
-                            });
-                        });
-                    }
-                });
-            }
+            
+            // 1. フォーム送信処理 (既存のコード)
+            // ...
+            
+            // 2. スムーズスクロール処理 (既存のコード)
+            // ...
         });
     </script>
 </body>

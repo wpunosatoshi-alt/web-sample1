@@ -126,4 +126,18 @@
         top: 0 !important;
         transform: none !important;
     }
+
+/* 💡 追加: サービスフローのステップ番号のスタイルをモバイルメニューのリンク項目にも適用 */
+    #mobile-menu a {
+        /* ナビゲーションリンクとして適切なパディングとフォントサイズを設定 */
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    /* 💡 モバイルメニューのブレイクポイント（768px以上で常に非表示）を明示 */
+    @media (min-width: 768px) {
+        #mobile-menu {
+            display: none !important;
+        }
+    }
 }
