@@ -15,40 +15,42 @@
 <body>
     
     <!-- ナビゲーションバー (ヘッダー) -->
-    <nav class="bg-white shadow-md sticky top-0 z-20">
+<nav class="bg-white shadow-md sticky top-0 z-20">
         <div class="main-container flex justify-between items-center h-16 px-4 sm:px-6 lg:px-8">
             
             <div class="text-xl font-bold text-gray-800">
                 相談支援センター
             </div>
             
-            <div class="space-x-4 hidden md:flex">
+            <div class="space-x-4 hidden lg:flex">
                 <a href="#" class="text-gray-600 hover:text-blue-600 transition duration-150 scroll-link">HOME</a>
                 <a href="#company" class="text-gray-600 hover:text-blue-600 transition duration-150 scroll-link">会社紹介</a>
                 <a href="#target" class="text-gray-600 hover:text-blue-600 transition duration-150 scroll-link">対象の方</a>
                 <a href="#flow" class="text-gray-600 hover:text-blue-600 transition duration-150 scroll-link">相談の流れ</a>
-                <a href="#office" class="text-gray-600 hover:text-blue-600 transition duration-150 scroll-link">事業所紹介</a>
-                <a href="#policy" class="text-gray-600 hover:text-blue-600 transition duration-150 scroll-link">運営方針</a>
                 <a href="#access" class="text-gray-600 hover:text-blue-600 transition duration-150 scroll-link">アクセス</a>
+                <a href="#policy" class="text-gray-600 hover:text-blue-600 transition duration-150 scroll-link">運営方針</a>
                 <a href="#contact-form" class="text-gray-600 hover:text-blue-600 transition duration-150 scroll-link">お問い合わせ</a>
             </div>
-
-            <button id="menu-button" class="md:hidden text-gray-600 hover:text-blue-600 p-2 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            
+            <button id="menu-button" class="text-gray-500 hover:text-gray-700 focus:outline-none lg:hidden">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
             </button>
         </div>
-
-        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg border-t border-gray-200">
-            <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-50 scroll-link">HOME</a>
-            <a href="#company" class="block px-4 py-2 text-gray-600 hover:bg-gray-50 scroll-link">会社紹介</a>
-            <a href="#target" class="block px-4 py-2 text-gray-600 hover:bg-gray-50 scroll-link">対象の方</a>
-            <a href="#flow" class="block px-4 py-2 text-gray-600 hover:bg-gray-50 scroll-link">相談の流れ</a>
-            <a href="#office" class="block px-4 py-2 text-gray-600 hover:bg-gray-50 scroll-link">事業所紹介</a>
-            <a href="#policy" class="block px-4 py-2 text-gray-600 hover:bg-gray-50 scroll-link">運営方針</a>
-            <a href="#access" class="block px-4 py-2 text-gray-600 hover:bg-gray-50 scroll-link">アクセス</a>
-            <a href="#contact-form" class="block px-4 py-2 text-gray-600 hover:bg-gray-50 scroll-link">お問い合わせ</a>
-        </div>
     </nav>
+
+    <div id="mobile-menu" class="lg:hidden fixed inset-0 bg-gray-900 bg-opacity-95 text-white z-10 hidden">
+        <div class="p-8 space-y-4">
+            <a href="#" class="block text-2xl hover:text-blue-400 transition duration-150 scroll-link">HOME</a>
+            <a href="#company" class="block text-2xl hover:text-blue-400 transition duration-150 scroll-link">会社紹介</a>
+            <a href="#target" class="block text-2xl hover:text-blue-400 transition duration-150 scroll-link">対象の方</a>
+            <a href="#flow" class="block text-2xl hover:text-blue-400 transition duration-150 scroll-link">相談の流れ</a>
+            <a href="#access" class="block text-2xl hover:text-blue-400 transition duration-150 scroll-link">アクセス</a>
+            <a href="#policy" class="block text-2xl hover:text-blue-400 transition duration-150 scroll-link">運営方針</a>
+            <a href="#contact-form" class="block text-2xl hover:text-blue-400 transition duration-150 scroll-link">お問い合わせ</a>
+        </div>
+    </div>
     
         <header class="mb-10 shadow-lg">
             
@@ -377,8 +379,8 @@
             // 2. スムーズスクロール処理 (ヘッダーの高さ調整を削除 - 修正済み)
             const navElement = document.querySelector('nav');
             if (navElement) {
-                // 💡 修正済み: const navHeight = navElement.offsetHeight; の行は削除されています。
-
+                // 💡 修正済み: navHeightの取得・調整は不要
+                
                 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                     const href = anchor.getAttribute('href');
                     const targetElement = href === '#' ? document.body : document.querySelector(href);
@@ -387,7 +389,7 @@
                         anchor.addEventListener('click', function (e) {
                             e.preventDefault();
                             
-                            // (モバイルメニューを閉じる処理)
+                            // モバイルメニューを閉じる処理
                             const mobileMenu = document.getElementById('mobile-menu');
                             if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                                 mobileMenu.classList.add('hidden');
@@ -398,9 +400,9 @@
                             if (href === '#') {
                                 targetPosition = 0;
                             } else {
-                                // 💡 修正済み: - navHeight の計算を削除
+                                // 💡 修正済み: - navHeight の計算を削除。CSSの scroll-margin-top に任せる
                                 const rect = targetElement.getBoundingClientRect();
-                                targetPosition = rect.top + window.scrollY; // CSSの scroll-margin-top に任せる
+                                targetPosition = rect.top + window.scrollY; 
                             }
                             
                             window.scrollTo({
@@ -414,7 +416,7 @@
             
             // 3. ハンバーガーメニュー開閉処理
             const menuButton = document.getElementById('menu-button');
-            const mobileMenu = document.getElementById('mobile-menu'); // 再定義せずにそのまま使用
+            const mobileMenu = document.getElementById('mobile-menu');
 
             if (menuButton && mobileMenu) {
                 menuButton.addEventListener('click', function() {
