@@ -376,10 +376,10 @@
                 });
             }
 
-            // 2. スムーズスクロール処理 (ヘッダーの高さ調整を削除 - 修正済み)
+            // 2. スムーズスクロール処理 (ヘッダーの高さ調整を完全に削除 - 最終修正)
             const navElement = document.querySelector('nav');
             if (navElement) {
-                // 💡 修正済み: navHeightの取得・調整は不要
+                // 💡 navHeight の取得は不要
                 
                 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                     const href = anchor.getAttribute('href');
@@ -400,9 +400,9 @@
                             if (href === '#') {
                                 targetPosition = 0;
                             } else {
-                                // 💡 修正済み: - navHeight の計算を削除。CSSの scroll-margin-top に任せる
+                                // 💡 修正済み: スクロール位置の計算から navHeight の減算を完全に削除
                                 const rect = targetElement.getBoundingClientRect();
-                                targetPosition = rect.top + window.scrollY; 
+                                targetPosition = rect.top + window.scrollY; // CSSの scroll-margin-top に任せる
                             }
                             
                             window.scrollTo({
@@ -416,7 +416,7 @@
             
             // 3. ハンバーガーメニュー開閉処理
             const menuButton = document.getElementById('menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenu = document.getElementById('mobile-menu'); // HTML修正で z-30 に変更済みのはず
 
             if (menuButton && mobileMenu) {
                 menuButton.addEventListener('click', function() {
