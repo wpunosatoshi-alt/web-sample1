@@ -14,9 +14,10 @@
     padding-right: 1rem;
 }
 
-/* 固定ヘッダーの高さ分、セクションのターゲット位置を調整（index.htmlの<style>ブロックに移行済み） */
+/* 固定ヘッダーの高さ分、セクションのターゲット位置を調整 */
 :target {
-    scroll-margin-top: 4rem; /* ヘッダーの高さ h-16 (4rem) に合わせる */
+    /* 💡 修正: 8rem に変更。ヘッダーの高さ(4rem) + セクションパディング(2rem) + 余裕(2rem) */
+    scroll-margin-top: 8rem; 
 }
 
 /* CTAボタンのグラデーション */

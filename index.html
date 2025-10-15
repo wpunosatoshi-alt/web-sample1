@@ -27,8 +27,8 @@
                 <a href="#company" class="text-gray-600 hover:text-blue-600 transition duration-150 scroll-link">会社紹介</a>
                 <a href="#target" class="text-gray-600 hover:text-blue-600 transition duration-150 scroll-link">対象の方</a>
                 <a href="#flow" class="text-gray-600 hover:text-blue-600 transition duration-150 scroll-link">相談の流れ</a>
-                <a href="#access" class="text-gray-600 hover:text-blue-600 transition duration-150 scroll-link">アクセス</a>
                 <a href="#policy" class="text-gray-600 hover:text-blue-600 transition duration-150 scroll-link">運営方針</a>
+                <a href="#access" class="text-gray-600 hover:text-blue-600 transition duration-150 scroll-link">事業所情報/アクセス</a>
                 <a href="#contact-form" class="text-gray-600 hover:text-blue-600 transition duration-150 scroll-link">お問い合わせ</a>
             </div>
             
@@ -46,8 +46,9 @@
             <a href="#company" class="block text-2xl hover:text-blue-400 transition duration-150 scroll-link">会社紹介</a>
             <a href="#target" class="block text-2xl hover:text-blue-400 transition duration-150 scroll-link">対象の方</a>
             <a href="#flow" class="block text-2xl hover:text-blue-400 transition duration-150 scroll-link">相談の流れ</a>
-            <a href="#access" class="block text-2xl hover:text-blue-400 transition duration-150 scroll-link">アクセス</a>
             <a href="#policy" class="block text-2xl hover:text-blue-400 transition duration-150 scroll-link">運営方針</a>
+            <a href="#access" class="block text-2xl hover:text-blue-400 transition duration-150 scroll-link">事業所情報/アクセス</a>
+
             <a href="#contact-form" class="block text-2xl hover:text-blue-400 transition duration-150 scroll-link">お問い合わせ</a>
         </div>
     </div>
@@ -354,32 +355,15 @@
     </footer>
 
     
-<script>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             
-            // 1. フォーム送信処理 (ダミー処理)
-            const contactForm = document.getElementById('contactForm');
-            const messageBox = document.getElementById('messageBox');
-            if (contactForm && messageBox) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    // 実際にはここでサーバーへの送信処理を行います。
-                    // 成功したと仮定してメッセージを表示
-                    messageBox.classList.remove('hidden');
-                    contactForm.reset();
-                    // ページの上部にスクロール
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    // 5秒後にメッセージを非表示
-                    setTimeout(() => {
-                        messageBox.classList.add('hidden');
-                    }, 5000);
-                });
-            }
+            // フォーム送信処理は省略
 
-            // 2. スムーズスクロール処理 (ヘッダーの高さ調整を完全に削除 - 最終修正)
+            // 2. スムーズスクロール処理 (高さ調整の計算を削除)
             const navElement = document.querySelector('nav');
             if (navElement) {
-                // 💡 navHeight の取得は不要
+                // navHeight の取得は不要
                 
                 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                     const href = anchor.getAttribute('href');
@@ -400,9 +384,9 @@
                             if (href === '#') {
                                 targetPosition = 0;
                             } else {
-                                // 💡 修正済み: スクロール位置の計算から navHeight の減算を完全に削除
+                                // 💡 修正済み: JSによる補正は行わず、CSSの scroll-margin-top に任せる
                                 const rect = targetElement.getBoundingClientRect();
-                                targetPosition = rect.top + window.scrollY; // CSSの scroll-margin-top に任せる
+                                targetPosition = rect.top + window.scrollY; 
                             }
                             
                             window.scrollTo({
@@ -416,7 +400,7 @@
             
             // 3. ハンバーガーメニュー開閉処理
             const menuButton = document.getElementById('menu-button');
-            const mobileMenu = document.getElementById('mobile-menu'); // HTML修正で z-30 に変更済みのはず
+            const mobileMenu = document.getElementById('mobile-menu');
 
             if (menuButton && mobileMenu) {
                 menuButton.addEventListener('click', function() {
@@ -426,7 +410,6 @@
                 // リンクをクリックした際にもメニューを閉じるようにする
                 mobileMenu.querySelectorAll('.scroll-link').forEach(link => {
                     link.addEventListener('click', function() {
-                        // スムーズスクロール実行後にメニューを閉じる
                         setTimeout(() => {
                             mobileMenu.classList.add('hidden');
                         }, 50); 
