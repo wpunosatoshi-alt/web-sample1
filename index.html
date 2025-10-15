@@ -365,46 +365,25 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             
-            // フォーム送信処理は省略
-
-            // 2. スムーズスクロール処理 (高さ調整の計算を削除)
-            const navElement = document.querySelector('nav');
-            if (navElement) {
-                // navHeight の取得は不要
-                
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    const href = anchor.getAttribute('href');
-                    const targetElement = href === '#' ? document.body : document.querySelector(href);
-
-                    if (targetElement) {
-                        anchor.addEventListener('click', function (e) {
-                            e.preventDefault();
-                            
-                            // モバイルメニューを閉じる処理
-                            const mobileMenu = document.getElementById('mobile-menu');
-                            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                                mobileMenu.classList.add('hidden');
-                            }
-                            
-                            let targetPosition;
-
-                            if (href === '#') {
-                                targetPosition = 0;
-                            } else {
-                                // 💡 修正済み: JSによる補正は行わず、CSSの scroll-margin-top に任せる
-                                const rect = targetElement.getBoundingClientRect();
-                                targetPosition = rect.top + window.scrollY;
-                            }
-                            
-                            window.scrollTo({
-                                top: targetPosition,
-                                behavior: 'smooth'
-                            });
-                        });
-                    }
+            // 1. フォーム送信処理 
+            const contactForm = document.getElementById('contactForm');
+            const messageBox = document.getElementById('messageBox');
+            if (contactForm && messageBox) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // 成功メッセージの表示とリセット
+                    messageBox.classList.remove('hidden');
+                    contactForm.reset();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    setTimeout(() => {
+                        messageBox.classList.add('hidden');
+                    }, 5000);
                 });
             }
-            
+
+            // 💡 2. スムーズスクロール処理 は削除されました。
+            //    これにより、<a href="#id"> の動作はブラウザのデフォルト（CSSの :target）に従います。
+
             // 3. ハンバーガーメニュー開閉処理
             const menuButton = document.getElementById('menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
@@ -417,6 +396,7 @@
                 // リンクをクリックした際にもメニューを閉じるようにする
                 mobileMenu.querySelectorAll('.scroll-link').forEach(link => {
                     link.addEventListener('click', function() {
+                        // スクロール処理自体はブラウザに任せ、メニューを閉じる処理のみを行う
                         setTimeout(() => {
                             mobileMenu.classList.add('hidden');
                         }, 50); 
