@@ -90,22 +90,15 @@
     
     /* 1. テキストボックス全体を右に100px移動 (中央からさらに右へ) */
     .hero-text-move {
-        /* transform を使い、中央配置を維持しつつ全体を右に100pxシフト */
         transform: translateX(-100px) !important; 
     }
     
     /* 2. 画像自体を右に100px移動し、下に5cm潜り込ませる */
     .hero-image-move {
         position: relative; 
-        /* 水平方向の移動を100pxに増量 */
         left: 100px !important; 
-        /* 垂直方向の移動 (下に5cm = 50px 潜り込ませる) */
         top: 50px !important; 
-        
-        /* 画像を1.1倍に拡大 */
         transform: scale(1.1);
-        
-        /* 以前の左寄せの原因となるマージンを確実に削除 */
         margin-right: 0 !important; 
     }
     
@@ -113,8 +106,10 @@
     .hero-image-container {
         width: 80%;
     }
+}
 
-    /* モバイルメニューを非表示にする */
+/* PC用メニューが表示されるlg(1024px)以上で、モバイルメニューを確実に非表示にする */
+@media (min-width: 1024px) {
     #mobile-menu {
         display: none !important;
     }
