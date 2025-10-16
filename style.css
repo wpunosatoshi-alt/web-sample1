@@ -103,7 +103,6 @@ header .main-container {
         max-width: 700px !important; /* 元: 600px → +100px */
         /* line-height: 1.3; 読みやすくする（任意） */
     }
-    }
 
     #mobile-menu {
         display: none !important;
