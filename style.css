@@ -167,3 +167,32 @@
     .hero-image-move {
         /* position: absolute; <- 親のflex-boxに任せる */
         /* bottom: 0;
+        right: 0; */
+        width: 100%; 
+        height: 100%;
+        object-fit: cover; /* コンテナ全体を覆うように拡大・トリミング */
+    }
+    
+    /* キャッチコピーのテキストボックス調整 */
+    .hero-text {
+        padding: 0.5rem; 
+        text-align: left;  
+    }
+
+    /* 見出しの文字サイズを調整 */
+    .hero-text h1 {
+        font-size: 1.25rem; 
+        line-height: 1.75rem;
+    }
+
+    /* 説明文の文字サイズを調整 */
+    .hero-text p {
+        font-size: 0.875rem; 
+    }
+
+    /* モバイルメニューのリンクスタイル */
+    #mobile-menu a {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+}
