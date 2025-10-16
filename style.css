@@ -59,6 +59,11 @@
 /* (中略: メインコンテナ、:target、CTAボタン、フッターのスタイルは変更なし) */
 
 
+/* ファイル名: style.css (最終復元版) */
+
+/* (中略: メインコンテナ、:target、CTAボタン、フッターのスタイルは変更なし) */
+
+
 /* ---------------------------------------------------------------------- */
 /* ヒーローセクションのレスポンシブなレイアウトと移動調整 */
 /* ---------------------------------------------------------------------- */
@@ -67,10 +72,10 @@
 
 
 /* PC/タブレット（md以上: 768px〜）の場合のレイアウトと移動調整 */
-/* 💡 修正: 適用範囲を 768px 以上に戻し、PC版の「良いレイアウト」を復元します */
+/* 💡 復元: 768px 以上で、元の安定したレイアウトを再適用します。 */
 @media (min-width: 768px) {
     
-    /* PC用メニューが表示されるlg(1024px)以上で、モバイルメニューを確実に非表示にする (TailwindCSSに依存) */
+    /* PC用メニューが表示されるlg(1024px)以上で、モバイルメニューを確実に非表示にする */
     @media (min-width: 1024px) {
         #mobile-menu {
             display: none !important;
@@ -84,15 +89,23 @@
     
     /* 1. テキストボックス全体の位置は変更なし（中央位置を維持） */
     .hero-text-move {
+        /* position: absolute; の影響を打ち消す */
+        position: relative; 
+        left: auto;
+        right: auto;
+        
         transform: none !important; 
         display: flex; 
         justify-content: center;
         align-items: center;
-        z-index: 10; /* キャッチコピーのZ-indexを調整 */
+        z-index: 10; 
+        
+        /* PC版は行内の要素として振る舞わせるため、必要に応じてheightを調整 */
+        height: auto; 
     }
     
     /* 2. 画像自体を右に2cm（20px）移動し、下に5cm潜り込ませる */
-    /* 💡 復元: 元の状態に戻すためのカスタム移動を再適用 */
+    /* 💡 復元: 画像のカスタム移動と拡大を再適用 */
     .hero-image-move {
         position: relative; 
         right: -20px !important; /* 右に20pxオフセット */
@@ -106,7 +119,10 @@
         width: 80%; 
         display: flex;
         justify-content: flex-end; 
-        z-index: 5; /* テキストより下に表示 */
+        z-index: 5; 
+        
+        /* PC版では高さを制限しないことで、コンテンツの高さに応じて伸縮させる */
+        height: auto;
     }
 }
 
@@ -115,10 +131,11 @@
 /* モバイルの調整 (767px以下) */
 /* ---------------------------------------------------------------------- */
 
-/* 💡 修正: モバイル版 (767px以下) で中央配置・画像半分・右寄せを適用 */
+/* 💡 モバイル版 (767px以下) のレイアウトは維持 */
 @media (max-width: 767px) {
     
-    /* モバイルメニューのスタイルは変更なし */
+    /* ... (モバイル版の「キャッチコピー中央、画像半分、右寄せ」のロジックは前回通り維持) ... */
+    
     #mobile-menu {
         background-color: #1E88E5 !important; 
     }
@@ -133,18 +150,18 @@
         width: 100%; 
     }
 
-    /* 💡 共通設定1: キャッチコピーのコンテナ (全体幅で中央配置) */
+    /* 💡 キャッチコピーのコンテナ (中央配置) */
     .hero-text-move {
-        width: 100% !important; /* フル幅 */
+        width: 100% !important; 
         left: 0 !important; 
         display: flex;
         align-items: center; 
-        justify-content: center; /* キャッチコピーを中央に配置 */
+        justify-content: center; 
         z-index: 20; 
-        background-color: rgba(255, 255, 255, 0.7); /* 半透明の白で画像の上に配置 */
+        background-color: rgba(255, 255, 255, 0.7); 
     }
 
-    /* 💡 共通設定2: 画像のコンテナ (全体幅、右に寄せて配置) */
+    /* 💡 画像のコンテナ (右に寄せて配置) */
     .hero-image-container {
         width: 100% !important; 
         right: 0 !important; 
@@ -152,26 +169,26 @@
         margin-left: 0 !important;
         
         display: flex;
-        justify-content: flex-end; /* 画像を右端に寄せる */
-        align-items: flex-end; /* 画像を下部に寄せる */
-        z-index: 10; /* キャッチコピーの下 */
+        justify-content: flex-end; 
+        align-items: flex-end; 
+        z-index: 10; 
     }
     
-    /* 💡 共通設定3: 画像自体を「実際の半分（画面幅の50%）」にして、右寄せにする */
+    /* 💡 画像自体を「画面幅の50%」にして、右寄せにする */
     .hero-image-move {
         position: relative;
-        width: 50%; /* 画面幅の半分 */
+        width: 50%; 
         height: 100%;
         max-height: 100%;
-        object-fit: contain; /* アスペクト比を維持しつつ収める */
+        object-fit: contain; 
         transform: none; 
     }
     
     /* キャッチコピーのテキストボックス調整 */
     .hero-text {
         padding: 0.5rem; 
-        text-align: center; /* 中央に配置 */
-        max-width: 80%; /* 中央に配置されたテキストの幅を制限 */
+        text-align: center; 
+        max-width: 80%; 
     }
 
     /* モバイルでの見出しの文字サイズは維持 */
