@@ -2,11 +2,12 @@
 説明: サイト全体のレイアウト、特にレスポンシブデザインとカスタム要素のスタイルを定義します。
 */
 
-/* スムーズスクロールはHTMLタグに直接定義（index.html内の<style>ブロックに移行済み） */
+/* ---------------------------------------------------------------------- */
+/* 全体レイアウト調整 */
+/* ---------------------------------------------------------------------- */
 
 /* メインコンテンツコンテナの最大幅と中央寄せ */
 .main-container {
-    /* PCでの最大幅を1280pxに設定 */
     max-width: 1280px; 
     margin-left: auto;
     margin-right: auto;
@@ -16,184 +17,132 @@
 
 /* 固定ヘッダーの高さ分、セクションのターゲット位置を調整 */
 :target {
-    /* 💡 統一: ナビゲーションバーの高さ分を考慮し8remに統一 */
     scroll-margin-top: 8rem !important; 
 }
 
-/* CTAボタンのグラデーション */
+/* ---------------------------------------------------------------------- */
+/* CTAボタン（お問い合わせなど） */
+/* ---------------------------------------------------------------------- */
 .cta-button {
-    /* 💡 修正: 背景色を青のグラデーションで強制的に設定 */
-    background: linear-gradient(to right, #1565C0, #1E88E5) !important; /* 濃い青から標準の青へ */
-    /* 💡 修正: 文字色を白で強制的に設定 */
+    background: linear-gradient(to right, #1565C0, #1E88E5) !important;
     color: white !important;
-    border: 3px solid white; /* 内側が白くなるよう枠線を追加 */
+    border: 3px solid white;
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
 }
-
 .cta-button:hover {
-    background: linear-gradient(to right, #1E88E5, #1565C0) !important; /* ホバー時もグラデーションを強制 */
-    transform: scale(1.05); /* ホバー時の拡大効果を維持 */
+    background: linear-gradient(to right, #1E88E5, #1565C0) !important;
+    transform: scale(1.05);
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
 }
-
-/* リンクタグとしての文字色も確実に白に設定 */
 .cta-button, .cta-button a {
     color: white !important;
 }
 
-
-/* サービスフローのアイコン背景 (変更なし) */
+/* ---------------------------------------------------------------------- */
+/* サービスフローなどの細部 */
+/* ---------------------------------------------------------------------- */
 .flow-step-icon {
     background-color: #E3F2FD; /* 水色 */
 }
 
-/* フッターの背景 (変更なし) */
+/* フッターの背景 */
 .custom-footer-bg {
     background-color: #e6f3ff !important;
 }
 
-
-/* ファイル名: style.css */
-
-/* (中略: メインコンテナ、:target、CTAボタン、フッターのスタイルは変更なし) */
-
-
-/* ファイル名: style.css (最終復元版) */
-
-/* (中略: メインコンテナ、:target、CTAボタン、フッターのスタイルは変更なし) */
-
-
 /* ---------------------------------------------------------------------- */
-/* ヒーローセクションのレスポンシブなレイアウトと移動調整 */
+/* ✨ ヒーローセクション（キャッチコピー中央＋女性画像右配置） */
 /* ---------------------------------------------------------------------- */
 
-/* (中略: .hero-image-container, .hero-text-move, .hero-image-move の基本設定はそのまま維持) */
+/* メインコンテナ（ヒーローエリア全体） */
+header .main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
 
+/* 背景画像（女性）を右下に配置 */
+.hero-image-container {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    z-index: 5;
+}
+.hero-image-move {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: right bottom;
+}
 
-/* PC/タブレット（md以上: 768px〜）の場合のレイアウトと移動調整 */
-/* 💡 復元: 768px 以上で、元の安定したレイアウトを再適用します。 */
-@media (min-width: 768px) {
-    
-    /* PC用メニューが表示されるlg(1024px)以上で、モバイルメニューを確実に非表示にする */
-    @media (min-width: 1024px) {
-        #mobile-menu {
-            display: none !important;
-        }
-    }
+/* キャッチコピー（中央配置） */
+.hero-text-move {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.hero-text {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(4px);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
-    /* キャッチコピーのボックスの幅を1.5倍に拡大 (約672px) */
-    .hero-text {
-        max-width: 672px !important;
-    }
-    
-    /* 1. テキストボックス全体の位置は変更なし（中央位置を維持） */
-    .hero-text-move {
-        /* position: absolute; の影響を打ち消す */
-        position: relative; 
-        left: auto;
-        right: auto;
-        
-        transform: none !important; 
-        display: flex; 
-        justify-content: center;
-        align-items: center;
-        z-index: 10; 
-        
-        /* PC版は行内の要素として振る舞わせるため、必要に応じてheightを調整 */
-        height: auto; 
-    }
-    
-    /* 2. 画像自体を右に2cm（20px）移動し、下に5cm潜り込ませる */
-    /* 💡 復元: 画像のカスタム移動と拡大を再適用 */
-    .hero-image-move {
-        position: relative; 
-        right: -20px !important; /* 右に20pxオフセット */
-        top: 50px !important; /* 下に50pxオフセット */
-        transform: scale(1.1); /* 1.1倍に拡大 */
-        margin-right: 0 !important; 
-    }
-    
-    /* 画像コンテナの幅調整 (80%に拡大) */
+/* PCサイズ（横幅1024px以上） */
+@media (min-width: 1024px) {
     .hero-image-container {
-        width: 80%; 
-        display: flex;
-        justify-content: flex-end; 
-        z-index: 5; 
-        
-        /* PC版では高さを制限しないことで、コンテンツの高さに応じて伸縮させる */
-        height: auto;
+        width: 45%;
+    }
+    .hero-text {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    #mobile-menu {
+        display: none !important;
     }
 }
 
-
-/* ---------------------------------------------------------------------- */
-/* モバイルの調整 (767px以下) */
-/* ---------------------------------------------------------------------- */
-
-/* 💡 モバイル版 (767px以下) のレイアウトは維持 */
-@media (max-width: 767px) {
-    
-    /* ... (モバイル版の「キャッチコピー中央、画像半分、右寄せ」のロジックは前回通り維持) ... */
-    
+/* タブレット〜モバイル共通 */
+@media (max-width: 1023px) {
     #mobile-menu {
         background-color: #1E88E5 !important; 
     }
+}
 
-    /* ヒーローセクションの共通設定をリセット */
-    .hero-text-move,
+/* スマホサイズ（〜767px） */
+@media (max-width: 767px) {
     .hero-image-container {
-        position: absolute;
-        top: 0 !important;
-        transform: none !important;
-        height: 100%;
-        width: 100%; 
+        width: 60%;
+        opacity: 0.5; /* テキストを見やすく */
     }
-
-    /* 💡 キャッチコピーのコンテナ (中央配置) */
-    .hero-text-move {
-        width: 100% !important; 
-        left: 0 !important; 
-        display: flex;
-        align-items: center; 
-        justify-content: center; 
-        z-index: 20; 
-        background-color: rgba(255, 255, 255, 0.7); 
-    }
-
-    /* 💡 画像のコンテナ (右に寄せて配置) */
-    .hero-image-container {
-        width: 100% !important; 
-        right: 0 !important; 
-        left: auto !important; 
-        margin-left: 0 !important;
-        
-        display: flex;
-        justify-content: flex-end; 
-        align-items: flex-end; 
-        z-index: 10; 
-    }
-    
-    /* 💡 画像自体を「画面幅の50%」にして、右寄せにする */
-    .hero-image-move {
-        position: relative;
-        width: 50%; 
-        height: 100%;
-        max-height: 100%;
-        object-fit: contain; 
-        transform: none; 
-    }
-    
-    /* キャッチコピーのテキストボックス調整 */
     .hero-text {
-        padding: 0.5rem; 
-        text-align: center; 
-        max-width: 80%; 
+        max-width: 80%;
+        padding: 1rem;
     }
-
-    /* モバイルでの見出しの文字サイズは維持 */
     .hero-text h1 {
-        font-size: 1.25rem; 
-        line-height: 1.75rem;
+        font-size: 1.5rem;
+        line-height: 2rem;
     }
+}
+
+/* ---------------------------------------------------------------------- */
+/* その他調整 */
+/* ---------------------------------------------------------------------- */
+html {
+    scroll-behavior: smooth;
 }
