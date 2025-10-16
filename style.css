@@ -1,5 +1,5 @@
 /* ファイル名: style.css
-説明: サイト全体のレイアウト、特にレスポンシブデザインとカスタム要素のスタイルを定義します。
+説明: サイト全体のレイアウト、特にヒーローセクションを中央テキスト＋左画像で調整。
 */
 
 /* ---------------------------------------------------------------------- */
@@ -36,7 +36,7 @@
 }
 
 /* ---------------------------------------------------------------------- */
-/* ヒーローセクション（キャッチコピー中央＋右に画像） */
+/* ✨ ヒーローセクション（キャッチコピー中央＋画像左） */
 /* ---------------------------------------------------------------------- */
 header .main-container {
     position: relative;
@@ -67,10 +67,10 @@ header .main-container {
     max-width: 650px;
 }
 
-/* ===== 画像（右側に配置） ===== */
+/* ===== 女性画像（左側に配置） ===== */
 .hero-image-container {
     position: absolute;
-    right: 8%;
+    left: 8%;
     top: 50%;
     transform: translateY(-50%);
     z-index: 5;
@@ -82,7 +82,7 @@ header .main-container {
     width: 100%;
     height: auto;
     object-fit: contain;
-    object-position: right center;
+    object-position: left center;
 }
 
 /* ---------------------------------------------------------------------- */
@@ -99,7 +99,7 @@ header .main-container {
 /* タブレット（768px〜1023px） */
 @media (max-width: 1023px) {
     .hero-image-container {
-        right: 2%;
+        left: 2%;
         width: 45%;
     }
     .hero-text {
@@ -116,7 +116,7 @@ header .main-container {
 
     .hero-image-container {
         position: relative;
-        right: auto;
+        left: auto;
         top: auto;
         transform: none;
         width: 70%;
