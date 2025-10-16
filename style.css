@@ -3,10 +3,8 @@
 */
 
 /* ---------------------------------------------------------------------- */
-/* 全体レイアウト調整 */
+/* 全体レイアウト */
 /* ---------------------------------------------------------------------- */
-
-/* メインコンテンツコンテナの最大幅と中央寄せ */
 .main-container {
     max-width: 1280px;
     margin-left: auto;
@@ -15,7 +13,6 @@
     padding-right: 1rem;
 }
 
-/* 固定ヘッダーの高さ分、セクションのターゲット位置を調整 */
 :target {
     scroll-margin-top: 8rem !important;
 }
@@ -39,111 +36,97 @@
 }
 
 /* ---------------------------------------------------------------------- */
-/* サービスフローなど */
-/* ---------------------------------------------------------------------- */
-.flow-step-icon {
-    background-color: #E3F2FD;
-}
-
-/* フッター */
-.custom-footer-bg {
-    background-color: #e6f3ff !important;
-}
-
-/* ---------------------------------------------------------------------- */
-/* ✨ ヒーローセクション：テキスト左・画像右 */
+/* ヒーローセクション（キャッチコピー中央＋右に画像） */
 /* ---------------------------------------------------------------------- */
 header .main-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     position: relative;
     height: 100%;
     min-height: 22rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
-    flex-wrap: wrap;
 }
 
-/* テキストエリア（左側） */
+/* ===== キャッチコピー（中央固定） ===== */
 .hero-text-move {
     position: relative;
     z-index: 10;
-    width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
+    text-align: center;
 }
 
 .hero-text {
-    text-align: left;
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(4px);
-    padding: 2rem;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(6px);
+    padding: 2rem 3rem;
     border-radius: 1rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    max-width: 650px;
 }
 
-/* 画像エリア（右側） */
+/* ===== 画像（右側に配置） ===== */
 .hero-image-container {
-    position: relative;
-    width: 50%;
-    height: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    overflow: hidden;
+    position: absolute;
+    right: 8%;
+    top: 50%;
+    transform: translateY(-50%);
     z-index: 5;
+    width: 40%;
+    max-width: 480px;
 }
 
 .hero-image-move {
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: contain;
-    object-position: right bottom;
+    object-position: right center;
 }
 
 /* ---------------------------------------------------------------------- */
 /* レスポンシブ対応 */
 /* ---------------------------------------------------------------------- */
 
-/* PCサイズ */
+/* PC（1024px以上） */
 @media (min-width: 1024px) {
     #mobile-menu {
         display: none !important;
     }
 }
 
-/* タブレット */
+/* タブレット（768px〜1023px） */
 @media (max-width: 1023px) {
+    .hero-image-container {
+        right: 2%;
+        width: 45%;
+    }
+    .hero-text {
+        max-width: 500px;
+    }
+}
+
+/* スマホ（〜767px） */
+@media (max-width: 767px) {
     header .main-container {
         flex-direction: column;
-        text-align: center;
+        justify-content: center;
     }
 
-    .hero-text-move,
     .hero-image-container {
-        width: 100%;
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        width: 70%;
+        margin-top: 1rem;
+        z-index: 5;
     }
 
     .hero-text {
         max-width: 90%;
-        margin: 0 auto;
-        text-align: center;
-    }
-
-    .hero-image-move {
-        width: 70%;
-        margin: 0 auto;
-        object-position: center bottom;
-    }
-}
-
-/* スマホ */
-@media (max-width: 767px) {
-    .hero-text {
-        padding: 1rem;
+        padding: 1.5rem;
     }
 
     .hero-text h1 {
@@ -152,14 +135,21 @@ header .main-container {
     }
 
     .hero-image-move {
-        width: 80%;
-        opacity: 0.7;
+        opacity: 0.8;
     }
 }
 
 /* ---------------------------------------------------------------------- */
 /* その他 */
 /* ---------------------------------------------------------------------- */
+.flow-step-icon {
+    background-color: #E3F2FD;
+}
+
+.custom-footer-bg {
+    background-color: #e6f3ff !important;
+}
+
 html {
     scroll-behavior: smooth;
 }
