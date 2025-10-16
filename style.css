@@ -58,34 +58,11 @@
 /* ヒーローセクションのレスポンシブなレイアウトと移動調整 */
 /* ---------------------------------------------------------------------- */
 
-/* 画像コンテナの調整（画像を右側に表示するために幅を設定） */
-.hero-image-container {
-    width: 100%; 
-    height: 100%;
-    margin-left: 10px; 
-    z-index: 0; 
-}
-
-/* キャッチコピーコンテナの調整（テキストが画像より上に来るようにする） */
-.hero-text-move {
-    width: 100%;
-    z-index: 10; 
-    position: absolute; 
-    left: 0px; 
-    top: 0;
-    right: 0;
-    bottom: 0;
-}
-
-.hero-image-move {
-    position: relative;
-    left: 0; 
-    top: 0;
-}
+/* (中略: .hero-image-container, .hero-text-move, .hero-image-move の基本設定はそのまま維持) */
 
 
 /* PC版（lg以上: 1024px〜）の場合のレイアウトと移動調整 */
-/* 💡 修正: 適用範囲を 1024px 以上に絞り込み、PC版のレイアウトを維持 */
+/* 💡 修正: PC版の画像がキャッチコピーにかぶらないよう、元の「良い感じ」の状態を復元 */
 @media (min-width: 1024px) {
     
     /* PC用メニューが表示されるlg(1024px)以上で、モバイルメニューを確実に非表示にする */
@@ -107,11 +84,12 @@
     }
     
     /* 2. 画像自体を右に2cm（20px）移動し、下に5cm潜り込ませる */
+    /* 💡 復元: 画像のカスタム移動と拡大を再適用 */
     .hero-image-move {
         position: relative; 
-        right: -20px !important; 
-        top: 50px !important; 
-        transform: scale(1.1);
+        right: -20px !important; /* 右に20pxオフセット */
+        top: 50px !important; /* 下に50pxオフセット */
+        transform: scale(1.1); /* 1.1倍に拡大 */
         margin-right: 0 !important; 
     }
     
@@ -128,7 +106,7 @@
 /* タブレット・モバイルの調整 (1023px以下) */
 /* ---------------------------------------------------------------------- */
 
-/* 💡 修正: max-width: 1023px でタブレットとモバイルを共通化 */
+/* 💡 再修正: max-width: 1023px でタブレットとモバイルを共通化し、中央配置・画像半分・右寄せを適用 */
 @media (max-width: 1023px) {
     
     /* モバイルメニューのスタイルは変更なし */
@@ -143,10 +121,10 @@
         top: 0 !important;
         transform: none !important;
         height: 100%;
-        width: 100%; /* フル幅を基準に設定 */
+        width: 100%; 
     }
 
-    /* 💡 共通設定1: キャッチコピーのコンテナ (全体幅で中央配置) */
+    /* 💡 共通設定1: キャッチコピーのコンテナ (中央配置) */
     .hero-text-move {
         width: 100% !important; /* フル幅 */
         left: 0 !important; 
@@ -157,7 +135,7 @@
         background-color: rgba(255, 255, 255, 0.7); /* 半透明の白で画像の上に配置 */
     }
 
-    /* 💡 共通設定2: 画像のコンテナ (全体幅、右に寄せて配置) */
+    /* 💡 共通設定2: 画像のコンテナ (右に寄せて配置) */
     .hero-image-container {
         width: 100% !important; 
         right: 0 !important; 
@@ -170,7 +148,7 @@
         z-index: 10; /* キャッチコピーの下 */
     }
     
-    /* 💡 共通設定3: 画像自体を「実際の半分」にして、右寄せにする */
+    /* 💡 共通設定3: 画像自体を「実際の半分（画面幅の50%）」にして、右寄せにする */
     .hero-image-move {
         position: relative;
         width: 50%; /* 画面幅の半分 */
