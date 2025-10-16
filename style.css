@@ -122,49 +122,50 @@
 
 /* モバイルの調整 */
 @media (max-width: 767px) {
-    /* モバイルでは重なりを解除し、移動をリセット */
+    
+    /* ヒーローセクションの共通設定 */
+    .hero-text-move,
     .hero-image-container {
-        margin-left: 0;
-    }
-    .hero-image-move,
-    .hero-text-move {
-        left: 0 !important;
+        position: absolute;
         top: 0 !important;
         transform: none !important;
+        width: 50%; /* コンテナの幅を半分にする */
+        height: 100%;
     }
 
-    /* サービスフローのステップ番号のスタイルをモバイルメニューのリンク項目にも適用 */
+    /* キャッチコピーのコンテナ (左半分) */
+    .hero-text-move {
+        left: 0 !important; /* 左側に配置 */
+        display: flex;
+        align-items: center; /* 垂直方向に中央揃え */
+        justify-content: flex-start; /* 水平方向に左揃え */
+    }
+
+    /* 画像のコンテナ (右半分) */
+    .hero-image-container {
+        right: 0 !important; /* 右側に配置 */
+    }
+    
+    /* キャッチコピーのテキストボックス調整 */
+    .hero-text {
+        padding: 0.5rem; /* 内側の余白を少し狭くする */
+        text-align: left;  /* テキストを左揃えにする */
+    }
+
+    /* 見出しの文字サイズを調整 */
+    .hero-text h1 {
+        font-size: 1.25rem; /* 約半分に縮小 */
+        line-height: 1.75rem;
+    }
+
+    /* 説明文の文字サイズを調整 */
+    .hero-text p {
+        font-size: 0.875rem; /* 約半分に縮小 */
+    }
+
+    /* モバイルメニューのリンクスタイル */
     #mobile-menu a {
         font-size: 1rem;
         font-weight: 500;
     }
-
-    /* ▼▼▼ ここから追加 ▼▼▼ */
-
-    /* ヒーローセクションの重なりを調整 */
-    .hero-text-move {
-        /* テキストを中央ではなく、上部に配置 */
-        align-items: flex-start;
-        /* 上からの余白を少し確保 */
-        padding-top: 1.5rem;
-    }
-
-    .hero-text {
-        /* テキストボックスの余白を小さくする */
-        padding: 1rem;
-    }
-
-    .hero-text h1 {
-        /* 見出しの文字サイズを小さくする (30px -> 24px) */
-        font-size: 1.5rem;
-        line-height: 2rem;
-    }
-
-    .hero-text p {
-        /* 説明文の文字サイズを小さくする (18px -> 16px) */
-        font-size: 1rem;
-        line-height: 1.5rem;
-    }
-    
-    /* ▲▲▲ ここまで追加 ▲▲▲ */
 }
