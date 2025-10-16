@@ -1,5 +1,5 @@
 /* ファイル名: style.css
-説明: サイト全体のレイアウト、特にヒーローセクションを中央テキスト＋左画像で調整。
+説明: キャッチコピー中央＋画像左、スマホでは縦並び・左右寄せに調整。
 */
 
 /* ---------------------------------------------------------------------- */
@@ -36,7 +36,7 @@
 }
 
 /* ---------------------------------------------------------------------- */
-/* ✨ ヒーローセクション（キャッチコピー中央＋画像左） */
+/* ✨ ヒーローセクション */
 /* ---------------------------------------------------------------------- */
 header .main-container {
     position: relative;
@@ -48,10 +48,25 @@ header .main-container {
     overflow: hidden;
 }
 
-/* ===== キャッチコピー（中央固定） ===== */
+/* === 画像（左側） === */
+.hero-image-container {
+    flex: 0 0 40%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+}
+
+.hero-image-move {
+    width: 85%;
+    height: auto;
+    object-fit: contain;
+    object-position: left center;
+}
+
+/* === キャッチコピー（中央固定） === */
 .hero-text-move {
-    position: relative;
-    z-index: 10;
+    flex: 0 0 60%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,88 +74,80 @@ header .main-container {
 }
 
 .hero-text {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(6px);
     padding: 2rem 3rem;
     border-radius: 1rem;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    max-width: 650px;
-}
-
-/* ===== 女性画像（左側に配置） ===== */
-.hero-image-container {
-    position: absolute;
-    left: 8%;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 5;
-    width: 40%;
-    max-width: 480px;
-}
-
-.hero-image-move {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    object-position: left center;
+    max-width: 600px;
 }
 
 /* ---------------------------------------------------------------------- */
 /* レスポンシブ対応 */
 /* ---------------------------------------------------------------------- */
 
-/* PC（1024px以上） */
+/* 💻 PC (1024px以上) */
 @media (min-width: 1024px) {
+    header .main-container {
+        flex-direction: row; /* 横並び */
+        justify-content: center;
+    }
+
+    .hero-image-container {
+        justify-content: flex-end;
+    }
+
+    .hero-text {
+        text-align: center;
+    }
+
     #mobile-menu {
         display: none !important;
     }
 }
 
-/* タブレット（768px〜1023px） */
+/* 📱 タブレット・スマホ共通（〜1023px） */
 @media (max-width: 1023px) {
-    .hero-image-container {
-        left: 2%;
-        width: 45%;
-    }
-    .hero-text {
-        max-width: 500px;
-    }
-}
-
-/* スマホ（〜767px） */
-@media (max-width: 767px) {
     header .main-container {
-        flex-direction: column;
-        justify-content: center;
+        flex-direction: column; /* 縦並び */
+        align-items: center;
     }
 
     .hero-image-container {
-        position: relative;
-        left: auto;
-        top: auto;
-        transform: none;
-        width: 70%;
-        margin-top: 1rem;
-        z-index: 5;
-    }
-
-    .hero-text {
-        max-width: 90%;
-        padding: 1.5rem;
-    }
-
-    .hero-text h1 {
-        font-size: 1.5rem;
-        line-height: 2rem;
+        order: 1;
+        width: 100%;
+        justify-content: flex-start; /* 左寄せ */
+        padding-left: 1rem;
     }
 
     .hero-image-move {
-        opacity: 0.8;
+        width: 65%;
+        max-width: 380px;
+        margin: 0;
+    }
+
+    .hero-text-move {
+        order: 2;
+        width: 100%;
+        justify-content: flex-end; /* 右寄せ */
+        padding-right: 1rem;
+        text-align: right;
+    }
+
+    .hero-text {
+        max-width: 85%;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.9);
+    }
+
+    .hero-text h1 {
+        font-size: 1.6rem;
+        line-height: 2.2rem;
     }
 }
 
 /* ---------------------------------------------------------------------- */
-/* その他 */
+/* その他デザイン要素 */
 /* ---------------------------------------------------------------------- */
 .flow-step-icon {
     background-color: #E3F2FD;
