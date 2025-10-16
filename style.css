@@ -101,13 +101,15 @@
     
     /* 1. テキストボックス全体を右に100px移動 (中央からさらに右へ) */
     .hero-text-move {
-        transform: translateX(-100px) !important; 
+        /* transform: translateX(-100px) !important;  <- キャッチコピーはそのままの位置で維持*/
+        transform: none !important; /* 中央に位置させるため、移動をキャンセル */
     }
     
     /* 2. 画像自体を右に100px移動し、下に5cm潜り込ませる */
     .hero-image-move {
         position: relative; 
-        left: 100px !important; 
+        /* 💡 修正: 右側スペースを10px狭くするために right: 10px; を追加 */
+        right: 10px !important; 
         top: 50px !important; 
         transform: scale(1.1);
         margin-right: 0 !important; 
@@ -115,7 +117,8 @@
     
     /* 画像コンテナの幅調整 (80%に拡大) */
     .hero-image-container {
-        width: 80%;
+        /* 💡 修正: 画像がより右に寄るように幅を調整 */
+        width: calc(80% + 10px); /* 右側の隙間10px分を相殺するために幅を広げる */
     }
 }
 
@@ -144,21 +147,39 @@
         position: absolute;
         top: 0 !important;
         transform: none !important;
-        width: 50%; /* コンテナの幅を半分にする */
         height: 100%;
     }
 
-    /* キャッチコピーのコンテナ (左半分) */
+    /* 💡 修正: キャッチコピーのコンテナ (左側2/3) */
     .hero-text-move {
+        width: 66.666% !important; /* 2/3の幅 */
         left: 0 !important; /* 左側に配置 */
         display: flex;
         align-items: center; /* 垂直方向に中央揃え */
-        justify-content: flex-start; /* 水平方向に左揃え */
+        justify-content: center; /* 水平方向に中央揃え (テキストは内部で左寄せ) */
     }
 
-    /* 画像のコンテナ (右半分) */
+    /* 💡 修正: 画像のコンテナ (右側1/3) */
     .hero-image-container {
+        width: 33.333% !important; /* 1/3の幅 */
         right: 0 !important; /* 右側に配置 */
+        left: auto !important; /* leftをautoに設定して右寄せを確定 */
+        margin-left: 0 !important;
+        
+        /* 画像がコンテナ内に収まるように調整 */
+        display: flex;
+        justify-content: flex-start; /* 画像自体を左に寄せ、右端を空ける */
+        align-items: flex-end; /* 画像を下部に寄せる */
+    }
+    
+    /* 画像自体を縮小してコンテナに収める */
+    .hero-image-move {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
     }
     
     /* キャッチコピーのテキストボックス調整 */
